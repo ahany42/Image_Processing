@@ -1,0 +1,22 @@
+img = imread('oIumJ.png');
+img = im2double(img);
+imshow(img);
+title("Image Before");
+freqimg = fft2(img);
+freqimg = fftshift(freqimg);
+figure;
+imshow(abs(log(freqimg)),[])
+title("Freq Image");
+H = ones(size(freqimg));
+H(10:25,115:125) = 0;
+H(35:45,115:125) = 0;
+H(95:105,115:125) = 0;
+H(215:225,115:125) = 0;
+H(275:285,115:125) = 0;
+H(295:310,115:125) = 0;
+finalimg = freqimg .* H;
+figure;
+finalimg = ifftshift(finalimg);
+finalimg = ifft2(finalimg);
+imshow(finalimg);
+title("Noise Reduced");

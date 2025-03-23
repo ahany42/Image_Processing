@@ -1,0 +1,16 @@
+img = imread('practicalimg.jpg');
+img = rgb2gray(img);
+img = im2bw(img);
+stats = regionprops(L,'Extent');
+rectangularity = [stats.Extent];
+squares = find(rectangularity > 0.9);
+squarenum = length(squares);
+circles = find(rectangularity>0.5 & rectangularity <0.9);
+circlenum = length(circles);
+circleimg = ismember(L,circles);
+squareimg = ismember(L,squares);
+imshow(circleimg);
+title(circlenum);
+figure;
+imshow(squareimg);
+title(squarenum);
